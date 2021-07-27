@@ -1,0 +1,26 @@
+#Independent settings for the local costmap
+local_costmap:
+    #publish_voxel_map: true
+    #global_frame: /map
+    global_frame: map
+    robot_base_frame: base_footprint
+    transform_tolerance: 0.3
+    update_frequency: 5 #8.0
+    publish_frequency: 5
+    static_map: false
+    rolling_window: true
+    width: 3
+    height: 3
+    resolution: 0.03
+    origin_x: 0.0
+    origin_y: 0.0
+    inflation_layer:
+         inflation_radius: 0.2
+
+
+
+    #plugins:
+          #- {name: obstacles_wall, type: "costmap_2d::VoxelLayer"}
+          #- {name: obstacles_virtualwall, type: "costmap_2d::VoxelLayer"}
+          #- {name: inflation_layer, type: "costmap_2d::InflationLayer"}
+

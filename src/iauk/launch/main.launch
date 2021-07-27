@@ -1,0 +1,96 @@
+<launch>
+
+        <!-- arm -->
+        <include file="$(find iauk)/launch/arm-setup.launch" />
+        
+        <!-- camera tf -->
+        <include file="$(find iauk)/launch/camera-tf.launch" />
+        
+        <!-- ref box -->
+        <include file="$(find atwork_refbox_ros_client)/ros/launch/robot_example_ros.launch" />
+
+	<!-- common nodes -->
+	<!--<include file="$(find ydlidar)/launch/lidar.launch" />-->
+	<include file="$(find rplidar_ros)/launch/rplidar.launch" />
+	
+	<!--  odl packages 
+	<node pkg="iauk" type="move_speed.py" name="move_speed" output="screen" respawn="true"/> 
+	<node pkg="iauk" type="dyna.py" name="dyna" output="screen" respawn="true" /> 
+	<node pkg="iauk" type="odom.py" name="odom" output="screen" respawn="false" />-->
+
+	
+	<node pkg="iauk" type="mix.py" name="mix" output="screen" respawn="false" />
+	<node pkg="beginner_tutorials" type="talker" name="vision" output="screen" respawn="true"/>
+	<!-- BNT  -->
+	<!--<node pkg="iauk" type="main_bnt.py" name="main" output="screen" respawn="false" />-->
+	<!-- BMT  -->
+	<!--<node pkg="iauk" type="main_bmt.py" name="main" output="screen" respawn="false" />-->
+
+	
+	
+
+	<!-- map -->
+	<arg name="map_file" default="$(find iauk)/map/newMap.yaml"/>
+	<node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+	<!-- amcl -->
+	<node pkg="amcl" type="amcl" name="amcl" output="log">
+		<remap from="scan" to="scan"/>
+		
+		<param name="min_particles" value="100"/>
+  		<param name="max_particles" value="5000"/>
+  		<param name="kld_err" value="0.01"/>
+  		<param name="kld_z" value="0.99"/>
+  		<param name="update_min_d" value="0.2"/>
+  		<param name="update_min_a" value="0.5"/>
+  		<param name="resample_interval" value="2"/>
+  		<param name="transform_tolerance" value="0.25" />
+  		<param name="recovery_alpha_slow" value="0.0"/>
+		<param name="recovery_alpha_fast" value="0.0"/>
+		<param name="initial_pose_x" value="0" />
+		<param name="initial_pose_y" value="0" />
+		<param name="initail_pose_a" value="0.0" />
+		<param name="initial_cov_xx" value="0.04" />
+		<param name="initial_cov_yy" value="0.04" />
+		<param name="initial_cov_aa" value="0.068" />
+		<param name="use_map_topic" value="true"/>
+		<param name="first_map_only" value="false"/>
+		<param name="laser_min_range" value="-1.0"/>
+  		<param name="laser_max_range" value="-1.0"/>
+  		<param name="laser_max_beams" value="100"/>
+  		<param name="laser_z_hit" value="0.95"/>
+  		<param name="laser_z_short" value="0.1"/>
+  		<param name="laser_z_max" value="0.05"/>
+  		<param name="laser_z_rand" value="0.05"/>
+  		<param name="laser_sigma_hit" value="0.2"/>
+  		<param name="laser_lambda_short" value="0.1"/>
+  		<param name="laser_likelihood_max_dist" value="2.0"/>
+  		<param name="laser_model_type" value="likelihood_field"/>
+		<param name="odom_model_type" value="omni-corrected"/>
+		<param name="odom_alpha1" value="0.08"/>
+  		<param name="odom_alpha2" value="0.03"/>
+  		<param name="odom_alpha3" value="0.05"/>
+  		<param name="odom_alpha4" value="0.02"/>
+  		<param name="odom_alpha5" value="0.05"/>
+  		<param name="odom_frame_id" value="odom"/>
+  		<param name="base_frame_id" value="base_footprint"/>
+  		<param name="global_frame_id" value="map"/>
+  		
+  		<param name="gui_publish_rate" value="1.0"/>
+
+	</node>
+
+	<!-- navigation -->
+	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    		<rosparam file="$(find iauk)/yaml/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    		<rosparam file="$(find iauk)/yaml/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    		<rosparam file="$(find iauk)/yaml/local_costmap_params.yaml" command="load" />
+    		<rosparam file="$(find iauk)/yaml/global_costmap_params.yaml" command="load" />
+    		<rosparam file="$(find iauk)/yaml/base_local_planner_params.yaml" command="load" />
+    		<rosparam file="$(find iauk)/yaml/move_base_params.yaml" command="load" />
+ 	</node>
+
+	<!-- rviz -->
+	<node name="visual" pkg="rviz" type="rviz" output="log" args="-d /home/iauk/catkin_ws/src/iauk/rviz/rviz_full.rviz" />
+
+</launch>

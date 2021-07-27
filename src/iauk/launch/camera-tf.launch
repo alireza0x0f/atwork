@@ -1,0 +1,4 @@
+<launch>
+  <node pkg="tf" type="static_transform_publisher" name="base_link_to_laser5"
+    args="0.0 0.0 0.0 0.0 0.0 0.0 /base_footprint /laser_frame2 40" />
+</launch>

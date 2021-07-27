@@ -1,0 +1,189 @@
+# Author: Rick Candell
+# Org: NIST
+# License: Public Domain
+# Configuration file format
+# Put a - between each entry 
+# Specify the following:
+#   name: name of action (optional)
+#   type: plan_exec_arm, move_arm, move_gripper, sleep, 'noop'
+#   spec:  for all move types, specify the name of the goal as joint positions
+#             for all plan types, specify the eef position as [x, y, z, r, p, y]
+#             for sleep, specify seconds as a float
+#   wait_depend: full name of dependency
+#   set_depend: name of dependency to update once action is complete
+
+-
+    type: reset
+    spec: 0
+-
+    type: move_arm
+    spec: cand   
+    set_depend: /arm_1/ready_to_begin 
+-
+    type: move_gripper
+    spec: opening
+-
+    type: sleep
+    spec: 2.0
+-
+    type: move_arm
+    spec: rob1_station_6_dwell
+-
+    type: sleep
+    spec: 0.5
+-
+    type: move_arm
+    spec: rob1_station_6_pick
+-
+    type: move_gripper
+    spec: closing
+-
+    type: sleep
+    spec: 2.0
+-
+    type: move_arm
+    spec: rob1_station_6_lift
+-
+    type: sleep
+    spec: 0.5
+-
+    type: move_arm
+    spec: rob1_station_6_safe
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: rob1_station_1_dwell
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: rob1_station_1_pick
+-
+    type: move_gripper
+    spec: opening
+-
+    type: sleep
+    spec: 2.0
+-
+    type: move_arm
+    spec: rob1_station_1_dwell
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: cand   
+-
+    type: move_arm
+    spec: rob1_station_1_dwell
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: rob1_station_1_pick
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_gripper
+    spec: closing
+-
+    type: sleep
+    spec: 2.0
+-
+    type: move_arm
+    spec: rob1_station_1_dwell
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: rob1_station_2_dwell
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: rob1_station_2_pick
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_gripper
+    spec: opening
+-
+    type: sleep
+    spec: 2.0
+-
+    type: move_arm
+    spec: rob1_station_2_dwell
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: cand
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: rob1_station_2_dwell
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: rob1_station_2_pick
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_gripper
+    spec: closing
+-
+    type: sleep
+    spec: 2.0
+-
+    type: move_arm
+    spec: rob1_station_2_dwell
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: rob1_station_6_safe
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: rob1_station_6_lift
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: rob1_station_6_pick
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_gripper
+    spec: opening
+-
+    type: sleep
+    spec: 2.0
+-
+    type: move_arm
+    spec: rob1_station_6_dwell
+-
+    type: sleep
+    spec: 1.0
+-
+    type: move_arm
+    spec: cand

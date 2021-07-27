@@ -1,0 +1,27 @@
+# Author: Rick Candell
+# Org: NIST
+# License: Public Domain
+# Configuration file format
+# Put a - between each entry 
+# Specify the following:
+#   name: name of action (optional)
+#   type: plan_exec_arm, move_arm, move_gripper, sleep, 'noop'
+#   spec:  for all move types, specify the name of the goal as joint positions
+#             for all plan types, specify the eef position as [x, y, z, r, p, y]
+#             for sleep, specify seconds as a float
+#   wait_depend: full name of dependency
+#   set_depend: name of dependency to update once action is complete
+
+reset:
+    - { type: reset, spec: 0 }
+    - { type: move_arm, spec: cand}
+    - { type: move_gripper, spec: opening}
+
+rob2_8to3:
+# set_depend: /arm_1/hey_catch
+# clear the depend after taking ball
+
+rob2_3to4:
+
+rob2_4to5:
+

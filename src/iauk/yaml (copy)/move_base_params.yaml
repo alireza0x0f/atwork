@@ -1,0 +1,10 @@
+
+footprint: [[0.225, -0.175],[0.25, 0], [0.225, 0.175], [-0.26, 0.175], [-0.26,-0.175]]
+controller_frequency: 2
+controller_patience: 15.0
+clearing_radius: 0.07
+footprint_padding: 0.05
+recovery_behavior_enabled: false
+clearing_rotation_allowed: false
+oscillation_timeout: 10
+planner_frequency: 0.5

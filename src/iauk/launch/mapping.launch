@@ -1,0 +1,34 @@
+<launch>
+	<!--<include file="$(find ydlidar)/launch/lidar.launch" />-->              
+	
+	<include file="$(find rplidar_ros)/launch/rplidar.launch" />
+	
+	<node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop" output="screen" respawn="true">
+            <param name="speed" value="0.05"/>
+            <param name="turn" value="0.05"/>
+	</node>
+	
+	
+	<!--<node pkg="iauk" type="move_speed.py" name="move_speed" output="screen" respawn="true"/>
+	<node pkg="iauk" type="dyna.py" name="dyna" output="screen" respawn="true" />
+	<node pkg="iauk" type="odom.py" name="odom" output="screen" respawn="false" />-->
+	<node pkg="iauk" type="mix.py" name="mix" output="screen" respawn="false" />
+	
+	<node type="rviz" name="rviz" pkg="rviz" args="-d /home/iauk/catkin_ws/src/iauk/rviz/rviz_mapping.rviz" />
+	
+	
+	
+	<node pkg="gmapping" type="slam_gmapping" name="gmapping" output="screen">
+		<param name="map_update_interval" value="3.0"/>
+		<param name="linearUpdate" value="0.3"/>
+		<param name="angularUpdate" value="0.2"/>
+		<param name="xmin" value="-5.0"/>
+		<param name="ymin" value="-5.0"/>
+		<param name="xmax" value="5.0"/>
+		<param name="ymax" value="5.0"/>
+		<param name="delta" value="0.02"/> <!-- resolution -->
+		<param name="base_frame" type="string" value="base_footprint" />
+		<remap from="scan" to="scan"/>
+	</node>
+	
+</launch>
